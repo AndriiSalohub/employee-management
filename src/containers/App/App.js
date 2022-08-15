@@ -1,4 +1,5 @@
 import React from "react";
+import Filter from "../../components/Filter/Filter";
 import Information from "../../components/Information/Information";
 import Search from "../../components/Search/Search";
 import "./App.scss";
@@ -10,6 +11,7 @@ function App() {
                 <Information />
                 <main className="main">
                     <Search />
+                    <Filter />
                 </main>
             </div>
         </>

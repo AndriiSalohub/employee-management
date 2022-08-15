@@ -1,0 +1,53 @@
+* {
+    box-sizing: border-box;
+}
+
+.filter {
+    margin-top: 20px;
+    &__buttons {
+        width: 100%;
+        font-size: 16px;
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0);
+        border: 1px solid #fff;
+        outline: none;
+        padding: 10px 20px;
+        &:hover {
+            color: #000000;
+            background-color: #fff;
+        }
+        &_first-btn {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        &_third-btn {
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .filter {
+        &__buttons {
+            width: 25%;
+            &_first-btn {
+                border-top-left-radius: 12px;
+                border-top-right-radius: 0px;
+            }
+            &_third-btn {
+                border-top-right-radius: 12px;
+                border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .filter {
+        &__buttons {
+            width: 20%;
+        }
+    }
+}
