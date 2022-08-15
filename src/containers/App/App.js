@@ -1,4 +1,5 @@
 import React from "react";
+import AddEmployee from "../../components/AddEmployee/AddEmployee";
 import EmployeesList from "../../components/EmployeesList/EmployeesList";
 import Filter from "../../components/Filter/Filter";
 import Information from "../../components/Information/Information";
@@ -17,6 +18,8 @@ function App() {
                 </main>
 
                 <EmployeesList />
+
+                <AddEmployee />
             </div>
         </>
     );
