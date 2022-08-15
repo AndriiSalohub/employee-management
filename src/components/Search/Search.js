@@ -3,13 +3,13 @@ import "./Search.scss";
 
 const Search = () => {
     return (
-        <div className="search">
+        <section className="search">
             <input
                 type="text"
                 className="search__input"
                 placeholder="Найти сотрудника"
             />
-        </div>
+        </section>
     );
 };
 
