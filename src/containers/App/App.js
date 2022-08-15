@@ -1,4 +1,5 @@
 import React from "react";
+import EmployeesList from "../../components/EmployeesList/EmployeesList";
 import Filter from "../../components/Filter/Filter";
 import Information from "../../components/Information/Information";
 import Search from "../../components/Search/Search";
@@ -9,10 +10,13 @@ function App() {
         <>
             <div className="app">
                 <Information />
+
                 <main className="main">
                     <Search />
                     <Filter />
                 </main>
+
+                <EmployeesList />
             </div>
         </>
     );
