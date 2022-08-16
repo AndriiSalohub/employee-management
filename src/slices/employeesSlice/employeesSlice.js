@@ -31,6 +31,9 @@ const employeesSlice = createSlice({
         setEmployees: (state, action) => {
             state.employees = action.payload;
         },
+        addEmployee: (state, action) => {
+            state.employees = [...state.employees, action.payload];
+        },
     },
     extraReducers: {
         [getEmployees.fulfilled.type]: () => console.log("fulfilled"),
@@ -39,5 +42,5 @@ const employeesSlice = createSlice({
     },
 });
 
-export const { setEmployees } = employeesSlice.actions;
+export const { setEmployees, addEmployee } = employeesSlice.actions;
 export default employeesSlice.reducer;
