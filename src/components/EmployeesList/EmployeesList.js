@@ -1,7 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { doc, deleteDoc } from "@firebase/firestore";
-import { deleteEmployee } from "../../slices/employeesSlice/employeesSlice";
+import { doc, deleteDoc, setDoc } from "@firebase/firestore";
+import {
+    deleteEmployee,
+    giveAward,
+} from "../../slices/employeesSlice/employeesSlice";
 import db from "../../firebase";
 import "./EmployeesList.scss";
 
@@ -14,6 +17,7 @@ const EmployeesList = () => {
                 return (
                     <EmployeesListItem
                         key={id}
+                        id={id}
                         fullName={fullName}
                         salary={salary}
                         award={award}
@@ -25,8 +29,9 @@ const EmployeesList = () => {
     );
 };
 
-const EmployeesListItem = ({ docId, fullName, salary, award }) => {
+const EmployeesListItem = ({ docId, fullName, salary, award, id }) => {
     const dispatch = useDispatch();
+    const employees = useSelector((state) => state.employees.employees);
 
     const handleDelete = async (docId) => {
         const docRef = doc(db, "employees", docId);
@@ -34,11 +39,25 @@ const EmployeesListItem = ({ docId, fullName, salary, award }) => {
         dispatch(deleteEmployee(docId));
     };
 
+    const handleAward = async (docId, award, id) => {
+        const docRef = doc(db, "employees", docId);
+        const payload = { ...employees[id - 1], award: !award };
+        await setDoc(docRef, payload);
+        dispatch(giveAward(docId));
+    };
+
     return (
-        <div className="employees-list__item">
+        <div
+            className={
+                award ? "employees-list__item award" : "employees-list__item"
+            }
+        >
             <h2 className="employees-list__item__full-name">{fullName}</h2>
             <p className="employees-list__item__salary">{salary}$</p>
-            <div className="employees-list__item__btn employees-list__item__btn_award">
+            <div
+                className="employees-list__item__btn employees-list__item__btn_award"
+                onClick={() => handleAward(docId, award, id)}
+            >
                 <img
                     src="https://i.ibb.co/HF25Mns/cookie-4.png"
                     alt="cake"
