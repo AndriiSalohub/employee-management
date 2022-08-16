@@ -1,16 +1,19 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "./EmployeesList.scss";
-import { employeesListDB } from "./EmployeesListDB";
 
 const EmployeesList = () => {
+    const employees = useSelector((state) => state.employees.employees);
+
     return (
         <div className="employees-list">
-            {employeesListDB.map(({ id, fullName, salary, onAward }) => {
+            {employees.map(({ id, fullName, salary, award }) => {
                 return (
                     <EmployeesListItem
                         key={id}
                         fullName={fullName}
                         salary={salary}
+                        award={award}
                     />
                 );
             })}
@@ -18,7 +21,7 @@ const EmployeesList = () => {
     );
 };
 
-const EmployeesListItem = ({ id, fullName, salary, onAward }) => (
+const EmployeesListItem = ({ id, fullName, salary, award }) => (
     <div className="employees-list__item">
         <h2 className="employees-list__item__full-name">{fullName}</h2>
         <p className="employees-list__item__salary">{salary}$</p>
