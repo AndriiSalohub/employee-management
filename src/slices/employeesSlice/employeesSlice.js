@@ -34,6 +34,11 @@ const employeesSlice = createSlice({
         addEmployee: (state, action) => {
             state.employees = [...state.employees, action.payload];
         },
+        deleteEmployee: (state, action) => {
+            state.employees = state.employees.filter(
+                (employee) => employee.docId !== action.payload
+            );
+        },
     },
     extraReducers: {
         [getEmployees.fulfilled.type]: () => console.log("fulfilled"),
@@ -42,5 +47,6 @@ const employeesSlice = createSlice({
     },
 });
 
-export const { setEmployees, addEmployee } = employeesSlice.actions;
+export const { setEmployees, addEmployee, deleteEmployee } =
+    employeesSlice.actions;
 export default employeesSlice.reducer;

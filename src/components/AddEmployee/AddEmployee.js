@@ -27,9 +27,8 @@ const AddEmployee = () => {
             salary: salary,
             award: false,
         };
-        const docRef = addDoc(collectionRef, payload);
+        const docRef = await addDoc(collectionRef, payload);
         const docId = docRef.id;
-        console.log({ ...payload, docId });
         dispatch(addEmployee({ ...payload, docId }));
     };
 
