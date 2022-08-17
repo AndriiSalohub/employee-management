@@ -9,14 +9,34 @@ const AddEmployee = () => {
     const [fullName, setFullName] = useState("");
     const [salary, setSalary] = useState(0);
 
+    const [fullNameError, setFullNameError] = useState("");
+    const [salaryError, setSalaryError] = useState("");
+
     const dispatch = useDispatch();
     const employees = useSelector((state) => state.employees.employees);
 
-    const handleFullNameChange = (e) => {
-        setFullName(e.target.value);
-    };
     const handleSalaryChange = (e) => {
         setSalary(e.target.value);
+    };
+
+    const handleFullNameError = (e) => {
+        setFullName(e.target.value);
+        const re = /^[a-zA-Z]+ [a-zA-Z]+$/;
+        if (!re.test(String(e.target.value).toLowerCase())) {
+            setFullNameError("Имя и фамилия введены неверно");
+        } else {
+            setFullNameError("");
+        }
+    };
+
+    const handleSalaryError = (e) => {
+        setSalary(e.target.value);
+        const re = /[0-9][1-9.]*[0-9]+[1-9]*/;
+        if (!re.test(String(e.target.value).toLowerCase())) {
+            setSalaryError("Зарплата введена неверно");
+        } else {
+            setSalaryError("");
+        }
     };
 
     const handleAdd = async () => {
@@ -34,6 +54,7 @@ const AddEmployee = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        e.target.reset();
     };
 
     return (
@@ -43,17 +64,27 @@ const AddEmployee = () => {
                 className="add-employee__form"
                 onSubmit={(e) => handleSubmit(e)}
             >
+                {fullNameError ? (
+                    <p className="add-employee__error add-employee__full-name_error">
+                        {fullNameError}
+                    </p>
+                ) : null}
                 <input
                     type="text"
                     className="add-employee__form__input add-employee__form__input_salary"
                     placeholder="Как его зовут?"
-                    onChange={(e) => handleFullNameChange(e)}
+                    onChange={(e) => handleFullNameError(e)}
                 />
+                {salaryError ? (
+                    <p className="add-employee__error add-employee__salary_error">
+                        {salaryError}
+                    </p>
+                ) : null}
                 <input
                     type="number"
                     className="add-employee__form__input add-employee__form__input_salary"
                     placeholder="З/П в $"
-                    onChange={(e) => handleSalaryChange(e)}
+                    onChange={(e) => handleSalaryError(e)}
                 />
                 <button
                     className="add-employee__form__btn"
