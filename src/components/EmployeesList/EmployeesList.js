@@ -10,21 +10,29 @@ import "./EmployeesList.scss";
 
 const EmployeesList = () => {
     const employees = useSelector((state) => state.employees.employees);
+    const term = useSelector((state) => state.search.term);
 
     return (
         <div className="employees-list">
-            {employees.map(({ id, fullName, salary, award, docId }) => {
-                return (
-                    <EmployeesListItem
-                        key={id}
-                        id={id}
-                        fullName={fullName}
-                        salary={salary}
-                        award={award}
-                        docId={docId}
-                    />
-                );
-            })}
+            {employees
+                .filter(
+                    (employee) =>
+                        employee.fullName
+                            .toLowerCase()
+                            .indexOf(term.toLowerCase()) > -1
+                )
+                .map(({ id, fullName, salary, award, docId }) => {
+                    return (
+                        <EmployeesListItem
+                            key={id}
+                            id={id}
+                            fullName={fullName}
+                            salary={salary}
+                            award={award}
+                            docId={docId}
+                        />
+                    );
+                })}
         </div>
     );
 };
