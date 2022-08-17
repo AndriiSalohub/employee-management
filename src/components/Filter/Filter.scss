@@ -12,6 +12,7 @@
         border: 1px solid #fff;
         outline: none;
         padding: 10px 20px;
+        cursor: pointer;
         &:hover {
             color: #000000;
             background-color: #fff;
@@ -25,6 +26,11 @@
             border-bottom-right-radius: 12px;
         }
     }
+}
+
+.active {
+    color: #000000;
+    background-color: #fff;
 }
 
 @media (min-width: 768px) {
