@@ -10,7 +10,8 @@ import "./EmployeesList.scss";
 
 const EmployeesList = () => {
     const employees = useSelector((state) => state.employees.employees);
-    const term = useSelector((state) => state.search.term);
+    const searchTerm = useSelector((state) => state.search.searchTerm);
+    const filterTerm = useSelector((state) => state.filter.filterTerm);
 
     return (
         <div className="employees-list">
@@ -19,8 +20,20 @@ const EmployeesList = () => {
                     (employee) =>
                         employee.fullName
                             .toLowerCase()
-                            .indexOf(term.toLowerCase()) > -1
+                            .indexOf(searchTerm.toLowerCase()) > -1
                 )
+                .filter((employee) => {
+                    switch (filterTerm) {
+                        case "rise": {
+                            return employee.award === true;
+                        }
+                        case "moreThan1000": {
+                            return employee.salary > 1000;
+                        }
+                        default:
+                            return employee;
+                    }
+                })
                 .map(({ id, fullName, salary, award, docId }) => {
                     return (
                         <EmployeesListItem
