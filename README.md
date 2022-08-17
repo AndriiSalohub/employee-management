@@ -14,3 +14,7 @@ Designed for easy and fast employee management
 -   Firebase
 -   Redux Toolkit
 -   Sass
+
+## Deployed project
+- Netlify: https://62fca3c880acff69b7b452dc--jovial-empanada-9bb295.netlify.app
+- Varcel: https://employee-management-app-ten.vercel.app
